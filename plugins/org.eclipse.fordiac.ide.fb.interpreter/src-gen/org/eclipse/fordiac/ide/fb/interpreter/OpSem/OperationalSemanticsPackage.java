@@ -114,22 +114,13 @@ public interface OperationalSemanticsPackage extends EPackage {
 	int EVENT_OCCURRENCE__FB_RUNTIME = 3;
 
 	/**
-	 * The feature id for the '<em><b>Created Transactions</b></em>' reference list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 *
-	 * @generated
-	 * @ordered
-	 */
-	int EVENT_OCCURRENCE__CREATED_TRANSACTIONS = 4;
-
-	/**
 	 * The feature id for the '<em><b>Parent FB</b></em>' reference. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 *
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT_OCCURRENCE__PARENT_FB = 5;
+	int EVENT_OCCURRENCE__PARENT_FB = 4;
 
 	/**
 	 * The feature id for the '<em><b>Result FB Runtime</b></em>' containment
@@ -138,7 +129,7 @@ public interface OperationalSemanticsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT_OCCURRENCE__RESULT_FB_RUNTIME = 6;
+	int EVENT_OCCURRENCE__RESULT_FB_RUNTIME = 5;
 
 	/**
 	 * The feature id for the '<em><b>Start Time</b></em>' attribute. <!--
@@ -147,7 +138,7 @@ public interface OperationalSemanticsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT_OCCURRENCE__START_TIME = 7;
+	int EVENT_OCCURRENCE__START_TIME = 6;
 
 	/**
 	 * The number of structural features of the '<em>Event Occurrence</em>' class.
@@ -156,7 +147,7 @@ public interface OperationalSemanticsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT_OCCURRENCE_FEATURE_COUNT = 8;
+	int EVENT_OCCURRENCE_FEATURE_COUNT = 7;
 
 	/**
 	 * The meta object id for the
@@ -314,96 +305,6 @@ public interface OperationalSemanticsPackage extends EPackage {
 	int COMPOSITE_FB_TYPE_RUNTIME = 4;
 
 	/**
-	 * The feature id for the '<em><b>Composite FB Type</b></em>' containment
-	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 *
-	 * @generated
-	 * @ordered
-	 */
-	int COMPOSITE_FB_TYPE_RUNTIME__COMPOSITE_FB_TYPE = FB_RUNTIME_ABSTRACT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Fb Element</b></em>' reference. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 *
-	 * @generated
-	 * @ordered
-	 */
-	int COMPOSITE_FB_TYPE_RUNTIME__FB_ELEMENT = FB_RUNTIME_ABSTRACT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Network Runtime</b></em>' reference. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 *
-	 * @generated
-	 * @ordered
-	 */
-	int COMPOSITE_FB_TYPE_RUNTIME__NETWORK_RUNTIME = FB_RUNTIME_ABSTRACT_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of structural features of the '<em>Composite FB Type Runtime</em>'
-	 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 *
-	 * @generated
-	 * @ordered
-	 */
-	int COMPOSITE_FB_TYPE_RUNTIME_FEATURE_COUNT = FB_RUNTIME_ABSTRACT_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Function FB Type</b></em>' containment
-	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 *
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_FB_TYPE_RUNTIME__FUNCTION_FB_TYPE = FB_RUNTIME_ABSTRACT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Function FB Type Runtime</em>'
-	 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 *
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_FB_TYPE_RUNTIME_FEATURE_COUNT = FB_RUNTIME_ABSTRACT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Service FB Type</b></em>' containment
-	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 *
-	 * @generated
-	 * @ordered
-	 */
-	int SERVICE_INTERFACE_FB_TYPE_RUNTIME__SERVICE_FB_TYPE = FB_RUNTIME_ABSTRACT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Service Interface FB Type
-	 * Runtime</em>' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 *
-	 * @generated
-	 * @ordered
-	 */
-	int SERVICE_INTERFACE_FB_TYPE_RUNTIME_FEATURE_COUNT = FB_RUNTIME_ABSTRACT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Simple FB Type</b></em>' containment
-	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 *
-	 * @generated
-	 * @ordered
-	 */
-	int SIMPLE_FB_TYPE_RUNTIME__SIMPLE_FB_TYPE = FB_RUNTIME_ABSTRACT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Simple FB Type Runtime</em>'
-	 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 *
-	 * @generated
-	 * @ordered
-	 */
-	int SIMPLE_FB_TYPE_RUNTIME_FEATURE_COUNT = FB_RUNTIME_ABSTRACT_FEATURE_COUNT + 1;
-
-	/**
 	 * The meta object id for the
 	 * '{@link org.eclipse.fordiac.ide.fb.interpreter.OpSem.impl.TransactionImpl
 	 * <em>Transaction</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -413,51 +314,6 @@ public interface OperationalSemanticsPackage extends EPackage {
 	 * @generated
 	 */
 	int TRANSACTION = 8;
-
-	/**
-	 * The feature id for the '<em><b>Input Event Occurrence</b></em>' containment
-	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 *
-	 * @generated
-	 * @ordered
-	 */
-	int TRANSACTION__INPUT_EVENT_OCCURRENCE = 0;
-
-	/**
-	 * The feature id for the '<em><b>Parent EO</b></em>' reference. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 *
-	 * @generated
-	 * @ordered
-	 */
-	int TRANSACTION__PARENT_EO = 1;
-
-	/**
-	 * The feature id for the '<em><b>Duration</b></em>' attribute. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 *
-	 * @generated
-	 * @ordered
-	 */
-	int TRANSACTION__DURATION = 2;
-
-	/**
-	 * The feature id for the '<em><b>Exceptions</b></em>' attribute list. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 *
-	 * @generated
-	 * @ordered
-	 */
-	int TRANSACTION__EXCEPTIONS = 3;
-
-	/**
-	 * The number of structural features of the '<em>Transaction</em>' class. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 *
-	 * @generated
-	 * @ordered
-	 */
-	int TRANSACTION_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the
@@ -515,6 +371,168 @@ public interface OperationalSemanticsPackage extends EPackage {
 	 * @ordered
 	 */
 	int FB_NETWORK_RUNTIME_FEATURE_COUNT = FB_RUNTIME_ABSTRACT_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Fbnetwork</b></em>' reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 *
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_FB_TYPE_RUNTIME__FBNETWORK = FB_NETWORK_RUNTIME__FBNETWORK;
+
+	/**
+	 * The feature id for the '<em><b>Transfer Data</b></em>' map. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 *
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_FB_TYPE_RUNTIME__TRANSFER_DATA = FB_NETWORK_RUNTIME__TRANSFER_DATA;
+
+	/**
+	 * The feature id for the '<em><b>Type Runtimes</b></em>' map. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 *
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_FB_TYPE_RUNTIME__TYPE_RUNTIMES = FB_NETWORK_RUNTIME__TYPE_RUNTIMES;
+
+	/**
+	 * The feature id for the '<em><b>Outer Network Runtime</b></em>' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 *
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_FB_TYPE_RUNTIME__OUTER_NETWORK_RUNTIME = FB_NETWORK_RUNTIME__OUTER_NETWORK_RUNTIME;
+
+	/**
+	 * The feature id for the '<em><b>Composite FB Type</b></em>' containment
+	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 *
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_FB_TYPE_RUNTIME__COMPOSITE_FB_TYPE = FB_NETWORK_RUNTIME_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Fb Element</b></em>' reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 *
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_FB_TYPE_RUNTIME__FB_ELEMENT = FB_NETWORK_RUNTIME_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Composite FB Type Runtime</em>'
+	 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 *
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_FB_TYPE_RUNTIME_FEATURE_COUNT = FB_NETWORK_RUNTIME_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Function FB Type</b></em>' containment
+	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 *
+	 * @generated
+	 * @ordered
+	 */
+	int FUNCTION_FB_TYPE_RUNTIME__FUNCTION_FB_TYPE = FB_RUNTIME_ABSTRACT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Function FB Type Runtime</em>'
+	 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 *
+	 * @generated
+	 * @ordered
+	 */
+	int FUNCTION_FB_TYPE_RUNTIME_FEATURE_COUNT = FB_RUNTIME_ABSTRACT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Service FB Type</b></em>' containment
+	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 *
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE_INTERFACE_FB_TYPE_RUNTIME__SERVICE_FB_TYPE = FB_RUNTIME_ABSTRACT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Service Interface FB Type
+	 * Runtime</em>' class. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 *
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE_INTERFACE_FB_TYPE_RUNTIME_FEATURE_COUNT = FB_RUNTIME_ABSTRACT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Simple FB Type</b></em>' containment
+	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 *
+	 * @generated
+	 * @ordered
+	 */
+	int SIMPLE_FB_TYPE_RUNTIME__SIMPLE_FB_TYPE = FB_RUNTIME_ABSTRACT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Simple FB Type Runtime</em>'
+	 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 *
+	 * @generated
+	 * @ordered
+	 */
+	int SIMPLE_FB_TYPE_RUNTIME_FEATURE_COUNT = FB_RUNTIME_ABSTRACT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Input Event Occurrence</b></em>' containment
+	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 *
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSACTION__INPUT_EVENT_OCCURRENCE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Parent EO</b></em>' reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 *
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSACTION__PARENT_EO = 1;
+
+	/**
+	 * The feature id for the '<em><b>Duration</b></em>' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 *
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSACTION__DURATION = 2;
+
+	/**
+	 * The feature id for the '<em><b>Exceptions</b></em>' attribute list. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 *
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSACTION__EXCEPTIONS = 3;
+
+	/**
+	 * The number of structural features of the '<em>Transaction</em>' class. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 *
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSACTION_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the
@@ -853,20 +871,6 @@ public interface OperationalSemanticsPackage extends EPackage {
 	EReference getEventOccurrence_FbRuntime();
 
 	/**
-	 * Returns the meta object for the reference list
-	 * '{@link org.eclipse.fordiac.ide.fb.interpreter.OpSem.EventOccurrence#getCreatedTransactions
-	 * <em>Created Transactions</em>}'. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
-	 *
-	 * @return the meta object for the reference list '<em>Created
-	 *         Transactions</em>'.
-	 * @see org.eclipse.fordiac.ide.fb.interpreter.OpSem.EventOccurrence#getCreatedTransactions()
-	 * @see #getEventOccurrence()
-	 * @generated
-	 */
-	EReference getEventOccurrence_CreatedTransactions();
-
-	/**
 	 * Returns the meta object for the reference
 	 * '{@link org.eclipse.fordiac.ide.fb.interpreter.OpSem.EventOccurrence#getParentFB
 	 * <em>Parent FB</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -1110,18 +1114,6 @@ public interface OperationalSemanticsPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getCompositeFBTypeRuntime_FbElement();
-
-	/**
-	 * Returns the meta object for the reference
-	 * '{@link org.eclipse.fordiac.ide.fb.interpreter.OpSem.CompositeFBTypeRuntime#getNetworkRuntime
-	 * <em>Network Runtime</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 *
-	 * @return the meta object for the reference '<em>Network Runtime</em>'.
-	 * @see org.eclipse.fordiac.ide.fb.interpreter.OpSem.CompositeFBTypeRuntime#getNetworkRuntime()
-	 * @see #getCompositeFBTypeRuntime()
-	 * @generated
-	 */
-	EReference getCompositeFBTypeRuntime_NetworkRuntime();
 
 	/**
 	 * Returns the meta object for class
@@ -1538,14 +1530,6 @@ public interface OperationalSemanticsPackage extends EPackage {
 		EReference EVENT_OCCURRENCE__FB_RUNTIME = eINSTANCE.getEventOccurrence_FbRuntime();
 
 		/**
-		 * The meta object literal for the '<em><b>Created Transactions</b></em>'
-		 * reference list feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 *
-		 * @generated
-		 */
-		EReference EVENT_OCCURRENCE__CREATED_TRANSACTIONS = eINSTANCE.getEventOccurrence_CreatedTransactions();
-
-		/**
 		 * The meta object literal for the '<em><b>Parent FB</b></em>' reference
 		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 *
@@ -1732,14 +1716,6 @@ public interface OperationalSemanticsPackage extends EPackage {
 		 * @generated
 		 */
 		EReference COMPOSITE_FB_TYPE_RUNTIME__FB_ELEMENT = eINSTANCE.getCompositeFBTypeRuntime_FbElement();
-
-		/**
-		 * The meta object literal for the '<em><b>Network Runtime</b></em>' reference
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 *
-		 * @generated
-		 */
-		EReference COMPOSITE_FB_TYPE_RUNTIME__NETWORK_RUNTIME = eINSTANCE.getCompositeFBTypeRuntime_NetworkRuntime();
 
 		/**
 		 * The meta object literal for the

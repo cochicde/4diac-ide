@@ -243,47 +243,13 @@ public abstract class TransactionImpl extends MinimalEObjectImpl.Container imple
 	 *
 	 * @generated
 	 */
-	public NotificationChain basicSetParentEO(EventOccurrence newParentEO, NotificationChain msgs) {
+	@Override
+	public void setParentEO(EventOccurrence newParentEO) {
 		EventOccurrence oldParentEO = parentEO;
 		parentEO = newParentEO;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
-					OperationalSemanticsPackage.TRANSACTION__PARENT_EO, oldParentEO, newParentEO);
-			if (msgs == null) {
-				msgs = notification;
-			} else {
-				msgs.add(notification);
-			}
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 *
-	 * @generated
-	 */
-	@Override
-	public void setParentEO(EventOccurrence newParentEO) {
-		if (newParentEO != parentEO) {
-			NotificationChain msgs = null;
-			if (parentEO != null) {
-				msgs = ((InternalEObject) parentEO).eInverseRemove(this,
-						OperationalSemanticsPackage.EVENT_OCCURRENCE__CREATED_TRANSACTIONS, EventOccurrence.class,
-						msgs);
-			}
-			if (newParentEO != null) {
-				msgs = ((InternalEObject) newParentEO).eInverseAdd(this,
-						OperationalSemanticsPackage.EVENT_OCCURRENCE__CREATED_TRANSACTIONS, EventOccurrence.class,
-						msgs);
-			}
-			msgs = basicSetParentEO(newParentEO, msgs);
-			if (msgs != null) {
-				msgs.dispatch();
-			}
-		} else if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, OperationalSemanticsPackage.TRANSACTION__PARENT_EO,
-					newParentEO, newParentEO));
+					oldParentEO, parentEO));
 		}
 	}
 
@@ -332,32 +298,10 @@ public abstract class TransactionImpl extends MinimalEObjectImpl.Container imple
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-		case OperationalSemanticsPackage.TRANSACTION__PARENT_EO:
-			if (parentEO != null) {
-				msgs = ((InternalEObject) parentEO).eInverseRemove(this,
-						OperationalSemanticsPackage.EVENT_OCCURRENCE__CREATED_TRANSACTIONS, EventOccurrence.class,
-						msgs);
-			}
-			return basicSetParentEO((EventOccurrence) otherEnd, msgs);
-		default:
-			return super.eInverseAdd(otherEnd, featureID, msgs);
-		}
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 *
-	 * @generated
-	 */
-	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case OperationalSemanticsPackage.TRANSACTION__INPUT_EVENT_OCCURRENCE:
 			return basicSetInputEventOccurrence(null, msgs);
-		case OperationalSemanticsPackage.TRANSACTION__PARENT_EO:
-			return basicSetParentEO(null, msgs);
 		default:
 			return super.eInverseRemove(otherEnd, featureID, msgs);
 		}

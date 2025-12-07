@@ -29,15 +29,13 @@ import org.eclipse.fordiac.ide.model.libraryElement.FBNetworkElement;
  * <em>Composite FB Type</em>}</li>
  * <li>{@link org.eclipse.fordiac.ide.fb.interpreter.OpSem.CompositeFBTypeRuntime#getFbElement
  * <em>Fb Element</em>}</li>
- * <li>{@link org.eclipse.fordiac.ide.fb.interpreter.OpSem.CompositeFBTypeRuntime#getNetworkRuntime
- * <em>Network Runtime</em>}</li>
  * </ul>
  *
  * @see org.eclipse.fordiac.ide.fb.interpreter.OpSem.OperationalSemanticsPackage#getCompositeFBTypeRuntime()
  * @model
  * @generated
  */
-public interface CompositeFBTypeRuntime extends FBRuntimeAbstract {
+public interface CompositeFBTypeRuntime extends FBNetworkRuntime {
 	/**
 	 * Returns the value of the '<em><b>Composite FB Type</b></em>' containment
 	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -86,30 +84,6 @@ public interface CompositeFBTypeRuntime extends FBRuntimeAbstract {
 	 * @generated
 	 */
 	void setFbElement(BlockFBNetworkElement value);
-
-	/**
-	 * Returns the value of the '<em><b>Network Runtime</b></em>' reference. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 *
-	 * @return the value of the '<em>Network Runtime</em>' reference.
-	 * @see #setNetworkRuntime(FBNetworkRuntime)
-	 * @see org.eclipse.fordiac.ide.fb.interpreter.OpSem.OperationalSemanticsPackage#getCompositeFBTypeRuntime_NetworkRuntime()
-	 * @model required="true"
-	 * @generated
-	 */
-	FBNetworkRuntime getNetworkRuntime();
-
-	/**
-	 * Sets the value of the
-	 * '{@link org.eclipse.fordiac.ide.fb.interpreter.OpSem.CompositeFBTypeRuntime#getNetworkRuntime
-	 * <em>Network Runtime</em>}' reference. <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 *
-	 * @param value the new value of the '<em>Network Runtime</em>' reference.
-	 * @see #getNetworkRuntime()
-	 * @generated
-	 */
-	void setNetworkRuntime(FBNetworkRuntime value);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->

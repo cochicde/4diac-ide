@@ -297,7 +297,7 @@
         </typeRuntimes>
       </resultFBRuntime>
     </inputEventOccurrence>
-    <outputEventOccurrences event="//@transactions.0/@inputEventOccurrence/@resultFBRuntime/@typeRuntimes.0/@value/@basicfbtype/@interfaceList/@eventOutputs.0" createdTransactions="//@transactions.1">
+    <outputEventOccurrences event="//@transactions.0/@inputEventOccurrence/@resultFBRuntime/@typeRuntimes.0/@value/@basicfbtype/@interfaceList/@eventOutputs.0" >
       <fbRuntime xsi:type="opsem:BasicFBTypeRuntime" activeState="CU">
         <basicfbtype name="E_CTU" comment="Event driven up counter">
           <versionInfo author="Alois Zoitl" date="2017-09-21" organization="fortiss GmbH" remarks="initial API and implementation and/or initial documentation" version="1.0"/>
@@ -843,7 +843,7 @@
         </typeRuntimes>
       </resultFBRuntime>
     </inputEventOccurrence>
-    <outputEventOccurrences event="//@transactions.1/@inputEventOccurrence/@resultFBRuntime/@typeRuntimes.1/@value/@simpleFBType/@interfaceList/@eventOutputs.0" createdTransactions="//@transactions.2">
+    <outputEventOccurrences event="//@transactions.1/@inputEventOccurrence/@resultFBRuntime/@typeRuntimes.1/@value/@simpleFBType/@interfaceList/@eventOutputs.0">
       <fbRuntime xsi:type="opsem:SimpleFBTypeRuntime">
         <simpleFBType name="UINT2INT" comment="Writing UINT input to INT output">
           <versionInfo author="Bianca Wiesmayr" date="2023-03-07" version="1.0"/>

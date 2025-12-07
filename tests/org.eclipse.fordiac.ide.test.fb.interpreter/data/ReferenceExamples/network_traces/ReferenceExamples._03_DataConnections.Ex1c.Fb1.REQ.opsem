@@ -144,7 +144,7 @@
         </typeRuntimes>
       </resultFBRuntime>
     </inputEventOccurrence>
-    <outputEventOccurrences event="//@transactions.0/@inputEventOccurrence/@resultFBRuntime/@typeRuntimes.0/@value/@simpleFBType/@interfaceList/@eventOutputs.0" createdTransactions="//@transactions.1">
+    <outputEventOccurrences event="//@transactions.0/@inputEventOccurrence/@resultFBRuntime/@typeRuntimes.0/@value/@simpleFBType/@interfaceList/@eventOutputs.0" >
       <fbRuntime xsi:type="opsem:SimpleFBTypeRuntime">
         <simpleFBType name="WORD2WORD" comment="Writing WORD input to output">
           <versionInfo author="Bianca Wiesmayr" date="2023-03-07" version="1.0"/>

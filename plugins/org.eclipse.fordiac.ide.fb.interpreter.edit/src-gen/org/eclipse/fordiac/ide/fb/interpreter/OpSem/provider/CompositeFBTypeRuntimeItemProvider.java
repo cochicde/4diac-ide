@@ -33,7 +33,7 @@ import org.eclipse.fordiac.ide.model.libraryElement.LibraryElementFactory;
  *
  * @generated
  */
-public class CompositeFBTypeRuntimeItemProvider extends FBRuntimeAbstractItemProvider {
+public class CompositeFBTypeRuntimeItemProvider extends FBNetworkRuntimeItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -56,7 +56,6 @@ public class CompositeFBTypeRuntimeItemProvider extends FBRuntimeAbstractItemPro
 			super.getPropertyDescriptors(object);
 
 			addFbElementPropertyDescriptor(object);
-			addNetworkRuntimePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -75,22 +74,6 @@ public class CompositeFBTypeRuntimeItemProvider extends FBRuntimeAbstractItemPro
 								"_UI_CompositeFBTypeRuntime_type"), //$NON-NLS-1$
 						OperationalSemanticsPackage.Literals.COMPOSITE_FB_TYPE_RUNTIME__FB_ELEMENT, true, false, true,
 						null, null, null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Network Runtime feature. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 *
-	 * @generated
-	 */
-	protected void addNetworkRuntimePropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_CompositeFBTypeRuntime_networkRuntime_feature"), //$NON-NLS-1$
-						getString("_UI_PropertyDescriptor_description", //$NON-NLS-1$
-								"_UI_CompositeFBTypeRuntime_networkRuntime_feature", "_UI_CompositeFBTypeRuntime_type"), //$NON-NLS-1$ //$NON-NLS-2$
-						OperationalSemanticsPackage.Literals.COMPOSITE_FB_TYPE_RUNTIME__NETWORK_RUNTIME, true, false,
-						true, null, null, null));
 	}
 
 	/**

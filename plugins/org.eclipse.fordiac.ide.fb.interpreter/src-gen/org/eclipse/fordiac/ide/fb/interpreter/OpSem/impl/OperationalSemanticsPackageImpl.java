@@ -299,7 +299,7 @@ public class OperationalSemanticsPackageImpl extends EPackageImpl implements Ope
 	 * @generated
 	 */
 	@Override
-	public EReference getEventOccurrence_CreatedTransactions() {
+	public EReference getEventOccurrence_ParentFB() {
 		return (EReference) eventOccurrenceEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -309,7 +309,7 @@ public class OperationalSemanticsPackageImpl extends EPackageImpl implements Ope
 	 * @generated
 	 */
 	@Override
-	public EReference getEventOccurrence_ParentFB() {
+	public EReference getEventOccurrence_ResultFBRuntime() {
 		return (EReference) eventOccurrenceEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -319,18 +319,8 @@ public class OperationalSemanticsPackageImpl extends EPackageImpl implements Ope
 	 * @generated
 	 */
 	@Override
-	public EReference getEventOccurrence_ResultFBRuntime() {
-		return (EReference) eventOccurrenceEClass.getEStructuralFeatures().get(6);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 *
-	 * @generated
-	 */
-	@Override
 	public EAttribute getEventOccurrence_StartTime() {
-		return (EAttribute) eventOccurrenceEClass.getEStructuralFeatures().get(7);
+		return (EAttribute) eventOccurrenceEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -501,16 +491,6 @@ public class OperationalSemanticsPackageImpl extends EPackageImpl implements Ope
 	@Override
 	public EReference getCompositeFBTypeRuntime_FbElement() {
 		return (EReference) compositeFBTypeRuntimeEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 *
-	 * @generated
-	 */
-	@Override
-	public EReference getCompositeFBTypeRuntime_NetworkRuntime() {
-		return (EReference) compositeFBTypeRuntimeEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -839,7 +819,6 @@ public class OperationalSemanticsPackageImpl extends EPackageImpl implements Ope
 		createEAttribute(eventOccurrenceEClass, EVENT_OCCURRENCE__ACTIVE);
 		createEAttribute(eventOccurrenceEClass, EVENT_OCCURRENCE__IGNORED);
 		createEReference(eventOccurrenceEClass, EVENT_OCCURRENCE__FB_RUNTIME);
-		createEReference(eventOccurrenceEClass, EVENT_OCCURRENCE__CREATED_TRANSACTIONS);
 		createEReference(eventOccurrenceEClass, EVENT_OCCURRENCE__PARENT_FB);
 		createEReference(eventOccurrenceEClass, EVENT_OCCURRENCE__RESULT_FB_RUNTIME);
 		createEAttribute(eventOccurrenceEClass, EVENT_OCCURRENCE__START_TIME);
@@ -858,7 +837,6 @@ public class OperationalSemanticsPackageImpl extends EPackageImpl implements Ope
 		compositeFBTypeRuntimeEClass = createEClass(COMPOSITE_FB_TYPE_RUNTIME);
 		createEReference(compositeFBTypeRuntimeEClass, COMPOSITE_FB_TYPE_RUNTIME__COMPOSITE_FB_TYPE);
 		createEReference(compositeFBTypeRuntimeEClass, COMPOSITE_FB_TYPE_RUNTIME__FB_ELEMENT);
-		createEReference(compositeFBTypeRuntimeEClass, COMPOSITE_FB_TYPE_RUNTIME__NETWORK_RUNTIME);
 
 		functionFBTypeRuntimeEClass = createEClass(FUNCTION_FB_TYPE_RUNTIME);
 		createEReference(functionFBTypeRuntimeEClass, FUNCTION_FB_TYPE_RUNTIME__FUNCTION_FB_TYPE);
@@ -946,7 +924,7 @@ public class OperationalSemanticsPackageImpl extends EPackageImpl implements Ope
 
 		// Add supertypes to classes
 		basicFBTypeRuntimeEClass.getESuperTypes().add(this.getFBRuntimeAbstract());
-		compositeFBTypeRuntimeEClass.getESuperTypes().add(this.getFBRuntimeAbstract());
+		compositeFBTypeRuntimeEClass.getESuperTypes().add(this.getFBNetworkRuntime());
 		functionFBTypeRuntimeEClass.getESuperTypes().add(this.getFBRuntimeAbstract());
 		serviceInterfaceFBTypeRuntimeEClass.getESuperTypes().add(this.getFBRuntimeAbstract());
 		simpleFBTypeRuntimeEClass.getESuperTypes().add(this.getFBRuntimeAbstract());
@@ -969,9 +947,6 @@ public class OperationalSemanticsPackageImpl extends EPackageImpl implements Ope
 		initEReference(getEventOccurrence_FbRuntime(), this.getFBRuntimeAbstract(), null, "fbRuntime", null, 1, 1, //$NON-NLS-1$
 				EventOccurrence.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEventOccurrence_CreatedTransactions(), this.getTransaction(), this.getTransaction_ParentEO(),
-				"createdTransactions", null, 0, -1, EventOccurrence.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, //$NON-NLS-1$
-				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEventOccurrence_ParentFB(), theLibraryElementPackage.getBlockFBNetworkElement(), null,
 				"parentFB", null, 0, 1, EventOccurrence.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, //$NON-NLS-1$
 				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1030,9 +1005,6 @@ public class OperationalSemanticsPackageImpl extends EPackageImpl implements Ope
 		initEReference(getCompositeFBTypeRuntime_FbElement(), theLibraryElementPackage.getBlockFBNetworkElement(), null,
 				"fbElement", null, 1, 1, CompositeFBTypeRuntime.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, //$NON-NLS-1$
 				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCompositeFBTypeRuntime_NetworkRuntime(), this.getFBNetworkRuntime(), null, "networkRuntime", //$NON-NLS-1$
-				null, 1, 1, CompositeFBTypeRuntime.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(compositeFBTypeRuntimeEClass, theLibraryElementPackage.getCompositeFBType(), "getModel", 1, 1, //$NON-NLS-1$
 				IS_UNIQUE, IS_ORDERED);
@@ -1070,10 +1042,9 @@ public class OperationalSemanticsPackageImpl extends EPackageImpl implements Ope
 		initEReference(getTransaction_InputEventOccurrence(), this.getEventOccurrence(), null, "inputEventOccurrence", //$NON-NLS-1$
 				null, 1, 1, Transaction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
 				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTransaction_ParentEO(), this.getEventOccurrence(),
-				this.getEventOccurrence_CreatedTransactions(), "parentEO", null, 0, 1, Transaction.class, !IS_TRANSIENT, //$NON-NLS-1$
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
+		initEReference(getTransaction_ParentEO(), this.getEventOccurrence(), null, "parentEO", null, 0, 1, //$NON-NLS-1$
+				Transaction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTransaction_Duration(), theXMLTypePackage.getLong(), "duration", null, 0, 1, //$NON-NLS-1$
 				Transaction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);

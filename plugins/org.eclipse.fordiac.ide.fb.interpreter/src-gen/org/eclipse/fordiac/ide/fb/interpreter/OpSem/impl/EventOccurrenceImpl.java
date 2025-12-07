@@ -13,21 +13,15 @@
  */
 package org.eclipse.fordiac.ide.fb.interpreter.OpSem.impl;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.fordiac.ide.fb.interpreter.OpSem.EventOccurrence;
 import org.eclipse.fordiac.ide.fb.interpreter.OpSem.FBRuntimeAbstract;
 import org.eclipse.fordiac.ide.fb.interpreter.OpSem.OperationalSemanticsPackage;
-import org.eclipse.fordiac.ide.fb.interpreter.OpSem.Transaction;
 import org.eclipse.fordiac.ide.model.libraryElement.BlockFBNetworkElement;
 import org.eclipse.fordiac.ide.model.libraryElement.Event;
 
@@ -46,8 +40,6 @@ import org.eclipse.fordiac.ide.model.libraryElement.Event;
  * <em>Ignored</em>}</li>
  * <li>{@link org.eclipse.fordiac.ide.fb.interpreter.OpSem.impl.EventOccurrenceImpl#getFbRuntime
  * <em>Fb Runtime</em>}</li>
- * <li>{@link org.eclipse.fordiac.ide.fb.interpreter.OpSem.impl.EventOccurrenceImpl#getCreatedTransactions
- * <em>Created Transactions</em>}</li>
  * <li>{@link org.eclipse.fordiac.ide.fb.interpreter.OpSem.impl.EventOccurrenceImpl#getParentFB
  * <em>Parent FB</em>}</li>
  * <li>{@link org.eclipse.fordiac.ide.fb.interpreter.OpSem.impl.EventOccurrenceImpl#getResultFBRuntime
@@ -118,17 +110,6 @@ public class EventOccurrenceImpl extends MinimalEObjectImpl.Container implements
 	 * @ordered
 	 */
 	protected FBRuntimeAbstract fbRuntime;
-
-	/**
-	 * The cached value of the '{@link #getCreatedTransactions() <em>Created
-	 * Transactions</em>}' reference list. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
-	 *
-	 * @see #getCreatedTransactions()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Transaction> createdTransactions;
 
 	/**
 	 * The cached value of the '{@link #getParentFB() <em>Parent FB</em>}'
@@ -377,21 +358,6 @@ public class EventOccurrenceImpl extends MinimalEObjectImpl.Container implements
 	 * @generated
 	 */
 	@Override
-	public EList<Transaction> getCreatedTransactions() {
-		if (createdTransactions == null) {
-			createdTransactions = new EObjectWithInverseResolvingEList<>(Transaction.class, this,
-					OperationalSemanticsPackage.EVENT_OCCURRENCE__CREATED_TRANSACTIONS,
-					OperationalSemanticsPackage.TRANSACTION__PARENT_EO);
-		}
-		return createdTransactions;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 *
-	 * @generated
-	 */
-	@Override
 	public BlockFBNetworkElement getParentFB() {
 		if (parentFB != null && parentFB.eIsProxy()) {
 			InternalEObject oldParentFB = (InternalEObject) parentFB;
@@ -553,30 +519,11 @@ public class EventOccurrenceImpl extends MinimalEObjectImpl.Container implements
 	 *
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-		case OperationalSemanticsPackage.EVENT_OCCURRENCE__CREATED_TRANSACTIONS:
-			return ((InternalEList<InternalEObject>) (InternalEList<?>) getCreatedTransactions()).basicAdd(otherEnd,
-					msgs);
-		default:
-			return super.eInverseAdd(otherEnd, featureID, msgs);
-		}
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 *
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case OperationalSemanticsPackage.EVENT_OCCURRENCE__FB_RUNTIME:
 			return basicSetFbRuntime(null, msgs);
-		case OperationalSemanticsPackage.EVENT_OCCURRENCE__CREATED_TRANSACTIONS:
-			return ((InternalEList<?>) getCreatedTransactions()).basicRemove(otherEnd, msgs);
 		case OperationalSemanticsPackage.EVENT_OCCURRENCE__RESULT_FB_RUNTIME:
 			return basicSetResultFBRuntime(null, msgs);
 		default:
@@ -606,8 +553,6 @@ public class EventOccurrenceImpl extends MinimalEObjectImpl.Container implements
 				return getFbRuntime();
 			}
 			return basicGetFbRuntime();
-		case OperationalSemanticsPackage.EVENT_OCCURRENCE__CREATED_TRANSACTIONS:
-			return getCreatedTransactions();
 		case OperationalSemanticsPackage.EVENT_OCCURRENCE__PARENT_FB:
 			if (resolve) {
 				return getParentFB();
@@ -646,10 +591,6 @@ public class EventOccurrenceImpl extends MinimalEObjectImpl.Container implements
 		case OperationalSemanticsPackage.EVENT_OCCURRENCE__FB_RUNTIME:
 			setFbRuntime((FBRuntimeAbstract) newValue);
 			return;
-		case OperationalSemanticsPackage.EVENT_OCCURRENCE__CREATED_TRANSACTIONS:
-			getCreatedTransactions().clear();
-			getCreatedTransactions().addAll((Collection<? extends Transaction>) newValue);
-			return;
 		case OperationalSemanticsPackage.EVENT_OCCURRENCE__PARENT_FB:
 			setParentFB((BlockFBNetworkElement) newValue);
 			return;
@@ -685,9 +626,6 @@ public class EventOccurrenceImpl extends MinimalEObjectImpl.Container implements
 		case OperationalSemanticsPackage.EVENT_OCCURRENCE__FB_RUNTIME:
 			setFbRuntime((FBRuntimeAbstract) null);
 			return;
-		case OperationalSemanticsPackage.EVENT_OCCURRENCE__CREATED_TRANSACTIONS:
-			getCreatedTransactions().clear();
-			return;
 		case OperationalSemanticsPackage.EVENT_OCCURRENCE__PARENT_FB:
 			setParentFB((BlockFBNetworkElement) null);
 			return;
@@ -719,8 +657,6 @@ public class EventOccurrenceImpl extends MinimalEObjectImpl.Container implements
 			return ignored != IGNORED_EDEFAULT;
 		case OperationalSemanticsPackage.EVENT_OCCURRENCE__FB_RUNTIME:
 			return fbRuntime != null;
-		case OperationalSemanticsPackage.EVENT_OCCURRENCE__CREATED_TRANSACTIONS:
-			return createdTransactions != null && !createdTransactions.isEmpty();
 		case OperationalSemanticsPackage.EVENT_OCCURRENCE__PARENT_FB:
 			return parentFB != null;
 		case OperationalSemanticsPackage.EVENT_OCCURRENCE__RESULT_FB_RUNTIME:

@@ -71,7 +71,6 @@ public class EventOccurrenceItemProvider extends ItemProviderAdapter implements 
 			addActivePropertyDescriptor(object);
 			addIgnoredPropertyDescriptor(object);
 			addFbRuntimePropertyDescriptor(object);
-			addCreatedTransactionsPropertyDescriptor(object);
 			addParentFBPropertyDescriptor(object);
 			addStartTimePropertyDescriptor(object);
 		}
@@ -139,22 +138,6 @@ public class EventOccurrenceItemProvider extends ItemProviderAdapter implements 
 								"_UI_EventOccurrence_type"), //$NON-NLS-1$
 						OperationalSemanticsPackage.Literals.EVENT_OCCURRENCE__FB_RUNTIME, true, false, true, null,
 						null, null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Created Transactions feature. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 *
-	 * @generated
-	 */
-	protected void addCreatedTransactionsPropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_EventOccurrence_createdTransactions_feature"), //$NON-NLS-1$
-						getString("_UI_PropertyDescriptor_description", //$NON-NLS-1$
-								"_UI_EventOccurrence_createdTransactions_feature", "_UI_EventOccurrence_type"), //$NON-NLS-1$ //$NON-NLS-2$
-						OperationalSemanticsPackage.Literals.EVENT_OCCURRENCE__CREATED_TRANSACTIONS, true, false, true,
-						null, null, null));
 	}
 
 	/**
@@ -298,6 +281,10 @@ public class EventOccurrenceItemProvider extends ItemProviderAdapter implements 
 
 		newChildDescriptors
 				.add(createChildParameter(OperationalSemanticsPackage.Literals.EVENT_OCCURRENCE__RESULT_FB_RUNTIME,
+						OperationalSemanticsFactory.eINSTANCE.createFBNetworkRuntime()));
+
+		newChildDescriptors
+				.add(createChildParameter(OperationalSemanticsPackage.Literals.EVENT_OCCURRENCE__RESULT_FB_RUNTIME,
 						OperationalSemanticsFactory.eINSTANCE.createCompositeFBTypeRuntime()));
 
 		newChildDescriptors
@@ -311,10 +298,6 @@ public class EventOccurrenceItemProvider extends ItemProviderAdapter implements 
 		newChildDescriptors
 				.add(createChildParameter(OperationalSemanticsPackage.Literals.EVENT_OCCURRENCE__RESULT_FB_RUNTIME,
 						OperationalSemanticsFactory.eINSTANCE.createSimpleFBTypeRuntime()));
-
-		newChildDescriptors
-				.add(createChildParameter(OperationalSemanticsPackage.Literals.EVENT_OCCURRENCE__RESULT_FB_RUNTIME,
-						OperationalSemanticsFactory.eINSTANCE.createFBNetworkRuntime()));
 	}
 
 	/**

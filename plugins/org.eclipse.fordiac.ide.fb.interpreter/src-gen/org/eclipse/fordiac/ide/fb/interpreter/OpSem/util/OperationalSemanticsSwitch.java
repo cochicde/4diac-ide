@@ -131,6 +131,9 @@ public class OperationalSemanticsSwitch<T> extends Switch<T> {
 			CompositeFBTypeRuntime compositeFBTypeRuntime = (CompositeFBTypeRuntime) theEObject;
 			T result = caseCompositeFBTypeRuntime(compositeFBTypeRuntime);
 			if (result == null) {
+				result = caseFBNetworkRuntime(compositeFBTypeRuntime);
+			}
+			if (result == null) {
 				result = caseFBRuntimeAbstract(compositeFBTypeRuntime);
 			}
 			if (result == null) {

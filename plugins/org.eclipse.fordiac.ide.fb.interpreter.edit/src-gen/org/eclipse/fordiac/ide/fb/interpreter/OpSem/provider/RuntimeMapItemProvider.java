@@ -180,6 +180,9 @@ public class RuntimeMapItemProvider extends ItemProviderAdapter implements IEdit
 				OperationalSemanticsFactory.eINSTANCE.createBasicFBTypeRuntime()));
 
 		newChildDescriptors.add(createChildParameter(OperationalSemanticsPackage.Literals.RUNTIME_MAP__VALUE,
+				OperationalSemanticsFactory.eINSTANCE.createFBNetworkRuntime()));
+
+		newChildDescriptors.add(createChildParameter(OperationalSemanticsPackage.Literals.RUNTIME_MAP__VALUE,
 				OperationalSemanticsFactory.eINSTANCE.createCompositeFBTypeRuntime()));
 
 		newChildDescriptors.add(createChildParameter(OperationalSemanticsPackage.Literals.RUNTIME_MAP__VALUE,
@@ -190,9 +193,6 @@ public class RuntimeMapItemProvider extends ItemProviderAdapter implements IEdit
 
 		newChildDescriptors.add(createChildParameter(OperationalSemanticsPackage.Literals.RUNTIME_MAP__VALUE,
 				OperationalSemanticsFactory.eINSTANCE.createSimpleFBTypeRuntime()));
-
-		newChildDescriptors.add(createChildParameter(OperationalSemanticsPackage.Literals.RUNTIME_MAP__VALUE,
-				OperationalSemanticsFactory.eINSTANCE.createFBNetworkRuntime()));
 	}
 
 	/**

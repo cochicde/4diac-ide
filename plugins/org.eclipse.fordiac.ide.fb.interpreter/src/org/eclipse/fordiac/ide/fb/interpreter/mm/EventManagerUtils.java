@@ -14,20 +14,30 @@
  *******************************************************************************/
 package org.eclipse.fordiac.ide.fb.interpreter.mm;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.fordiac.ide.fb.interpreter.DefaultRunFBType;
+import org.eclipse.fordiac.ide.fb.interpreter.OpSem.CompositeFBTypeRuntime;
 import org.eclipse.fordiac.ide.fb.interpreter.OpSem.EventManager;
 import org.eclipse.fordiac.ide.fb.interpreter.OpSem.EventOccurrence;
+import org.eclipse.fordiac.ide.fb.interpreter.OpSem.FBNetworkRuntime;
 import org.eclipse.fordiac.ide.fb.interpreter.OpSem.FBRuntimeAbstract;
 import org.eclipse.fordiac.ide.fb.interpreter.OpSem.FBTransaction;
 import org.eclipse.fordiac.ide.fb.interpreter.OpSem.Transaction;
+import org.eclipse.fordiac.ide.fb.interpreter.api.EventOccFactory;
+import org.eclipse.fordiac.ide.fb.interpreter.api.TransactionFactory;
+import org.eclipse.fordiac.ide.model.libraryElement.AdapterDeclaration;
+import org.eclipse.fordiac.ide.model.libraryElement.Connection;
+import org.eclipse.fordiac.ide.model.libraryElement.Event;
 import org.eclipse.fordiac.ide.model.libraryElement.FBType;
+import org.eclipse.fordiac.ide.model.libraryElement.IInterfaceElement;
 import org.eclipse.fordiac.ide.model.libraryElement.LibraryElementFactory;
 import org.eclipse.fordiac.ide.model.libraryElement.Value;
 import org.eclipse.fordiac.ide.model.libraryElement.VarDeclaration;
@@ -59,12 +69,8 @@ public final class EventManagerUtils {
 				final FBRuntimeAbstract newfbRuntime = getLatestFbRuntime(fbtransaction);
 
 				if (network) {
-					for (final EventOccurrence eo : fbtransaction.getOutputEventOccurrences()) {
-						for (final Transaction t : eo.getCreatedTransactions()) {
-							t.getInputEventOccurrence().setFbRuntime(EcoreUtil.copy(newfbRuntime));
-							eventManager.getTransactions().add(t);
-						}
-					}
+					eventManager.getTransactions().addAll(createTransactionsForConnectedPins(
+							fbtransaction.getOutputEventOccurrences(), (FBNetworkRuntime) newfbRuntime));
 				} else if ((i + 1) < transactions.size()) {
 					transactions.get(i + 1).getInputEventOccurrence().setFbRuntime(newfbRuntime);
 				}
@@ -90,6 +96,68 @@ public final class EventManagerUtils {
 		transaction.getInputEventOccurrence().setStartTime(startTime);
 		final var result = processEventOccurrence(transaction.getInputEventOccurrence());
 		transaction.getOutputEventOccurrences().addAll(result);
+	}
+
+	private static FBTransaction createNewTransaction(IInterfaceElement dest, final EventOccurrence sourceEO) {
+		if (dest instanceof final AdapterDeclaration aDecl) {
+			dest = InterfacePinUtils.getContainedPin(aDecl, sourceEO.getEvent().getName());
+		}
+		if (!(dest instanceof Event)) {
+			throw new IllegalArgumentException("cannot trigger FB with pin " + dest.getName()); //$NON-NLS-1$
+		}
+		final EventOccurrence destEO = EventOccFactory.createFrom((Event) dest, null);
+
+		// if the destination EO does not have a parent, it might be the outgoing
+		// connection for the network inside a composite
+		if (destEO.getParentFB() == null
+				// Interface List -> FB Type -> FB Type Runtime
+				&& dest.eContainer().eContainer().eContainer() instanceof final CompositeFBTypeRuntime rt) {
+			destEO.setParentFB(rt.getFbElement());
+		}
+		return TransactionFactory.createFrom(destEO);
+	}
+
+	private static List<FBTransaction> processEventConns(final FBNetworkRuntime fBNetworkRuntime,
+			final EventOccurrence outputEo) {
+		final List<FBTransaction> generatedT = new ArrayList<>();
+		if (InterfacePinUtils.isInput(outputEo.getEvent())) {
+			// very first transaction (if needed) / initial trigger pin
+			generatedT.add(createNewInitialTransaction(outputEo.getEvent(), fBNetworkRuntime));
+		} else {
+			// Find the Original Pins for all connected FBs
+			for (final Connection conn : ConnectionUtils.getOutputConnections(outputEo.getEvent())) {
+				generatedT.add(createNewTransaction(conn.getDestination(), outputEo));
+			}
+		}
+		return generatedT;
+	}
+
+	private static List<Transaction> createTransactionsForConnectedPins(final EList<EventOccurrence> typeOutputEos,
+			final FBNetworkRuntime fBNetworkRuntime) {
+		final var transactions = new ArrayList<Transaction>();
+
+		typeOutputEos.forEach(typeEo -> {
+			// generate transactions for triggering all subsequent blocks
+			final EventOccurrence networkEo = getCorrespondingNetworkEvent(typeEo, fBNetworkRuntime);
+			transactions.addAll(processEventConns(fBNetworkRuntime, networkEo));
+		});
+		return transactions;
+	}
+
+	private static FBTransaction createNewInitialTransaction(final IInterfaceElement dest,
+			final FBNetworkRuntime fBNetworkRuntime) {
+		final FBNetworkRuntime copiedRt = EcoreUtil.copy(fBNetworkRuntime);
+		final EventOccurrence destinationEventOccurence = EventOccFactory.createFrom((Event) dest, copiedRt);
+		destinationEventOccurence.setParentFB(dest.getBlockFBNetworkElement());
+		return TransactionFactory.createFrom(destinationEventOccurence);
+	}
+
+	private static EventOccurrence getCorrespondingNetworkEvent(final EventOccurrence typeEo,
+			final FBNetworkRuntime fBNetworkRuntime) {
+		final Event mappedEvent = InterfacePinUtils.findEventInInterface(typeEo.getParentFB(), typeEo.getEvent());
+		final EventOccurrence networkEo = EventOccFactory.createFrom(mappedEvent, EcoreUtil.copy(fBNetworkRuntime));
+		networkEo.setParentFB(typeEo.getParentFB());
+		return networkEo;
 	}
 
 	private static List<EventOccurrence> processEventOccurrence(final EventOccurrence eo) {

@@ -192,7 +192,7 @@
         </typeRuntimes>
       </resultFBRuntime>
     </inputEventOccurrence>
-    <outputEventOccurrences event="//@transactions.0/@inputEventOccurrence/@resultFBRuntime/@typeRuntimes.0/@value/@basicfbtype/@interfaceList/@eventOutputs.1" createdTransactions="//@transactions.1">
+    <outputEventOccurrences event="//@transactions.0/@inputEventOccurrence/@resultFBRuntime/@typeRuntimes.0/@value/@basicfbtype/@interfaceList/@eventOutputs.1" >
       <fbRuntime xsi:type="opsem:BasicFBTypeRuntime" activeState="R">
         <basicfbtype name="E_CTU" comment="Event driven up counter">
           <versionInfo author="Alois Zoitl" date="2017-09-21" organization="fortiss GmbH" remarks="initial API and implementation and/or initial documentation" version="1.0"/>

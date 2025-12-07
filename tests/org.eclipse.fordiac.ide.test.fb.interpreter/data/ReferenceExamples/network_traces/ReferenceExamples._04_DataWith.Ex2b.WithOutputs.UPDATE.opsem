@@ -457,7 +457,7 @@
         </typeRuntimes>
       </resultFBRuntime>
     </inputEventOccurrence>
-    <outputEventOccurrences event="//@transactions.0/@inputEventOccurrence/@resultFBRuntime/@typeRuntimes.0/@value/@basicfbtype/@interfaceList/@eventOutputs.1" createdTransactions="//@transactions.1">
+    <outputEventOccurrences event="//@transactions.0/@inputEventOccurrence/@resultFBRuntime/@typeRuntimes.0/@value/@basicfbtype/@interfaceList/@eventOutputs.1" >
       <fbRuntime xsi:type="opsem:BasicFBTypeRuntime" activeState="writeOutputs">
         <basicfbtype name="WithOutputs" comment="Only UPDATE updates the data inputs">
           <versionInfo author="Bianca Wiesmayr" date="2023-03-07" organization="Johannes Kepler University Linz" remarks="initial API and implementation and/or initial documentation" version="1.0"/>
@@ -1147,7 +1147,7 @@
         </typeRuntimes>
       </resultFBRuntime>
     </inputEventOccurrence>
-    <outputEventOccurrences event="//@transactions.1/@inputEventOccurrence/@resultFBRuntime/@typeRuntimes.1/@value/@simpleFBType/@interfaceList/@eventOutputs.0" createdTransactions="//@transactions.2">
+    <outputEventOccurrences event="//@transactions.1/@inputEventOccurrence/@resultFBRuntime/@typeRuntimes.1/@value/@simpleFBType/@interfaceList/@eventOutputs.0" >
       <fbRuntime xsi:type="opsem:SimpleFBTypeRuntime">
         <simpleFBType name="BOOL2BOOL" comment="Writing BOOL from input to output">
           <versionInfo author="Bianca Wiesmayr" date="2023-03-07" version="1.0"/>
@@ -1839,7 +1839,7 @@
         </typeRuntimes>
       </resultFBRuntime>
     </inputEventOccurrence>
-    <outputEventOccurrences event="//@transactions.2/@inputEventOccurrence/@resultFBRuntime/@typeRuntimes.2/@value/@simpleFBType/@interfaceList/@eventOutputs.0" createdTransactions="//@transactions.3">
+    <outputEventOccurrences event="//@transactions.2/@inputEventOccurrence/@resultFBRuntime/@typeRuntimes.2/@value/@simpleFBType/@interfaceList/@eventOutputs.0" >
       <fbRuntime xsi:type="opsem:SimpleFBTypeRuntime">
         <simpleFBType name="INT2INT" comment="Writing INT from input to output">
           <versionInfo author="Bianca Wiesmayr" date="2023-03-07" version="1.0"/>
@@ -2595,7 +2595,7 @@
         </typeRuntimes>
       </resultFBRuntime>
     </inputEventOccurrence>
-    <outputEventOccurrences event="//@transactions.3/@inputEventOccurrence/@resultFBRuntime/@typeRuntimes.3/@value/@simpleFBType/@interfaceList/@eventOutputs.0" createdTransactions="//@transactions.4">
+    <outputEventOccurrences event="//@transactions.3/@inputEventOccurrence/@resultFBRuntime/@typeRuntimes.3/@value/@simpleFBType/@interfaceList/@eventOutputs.0" >
       <fbRuntime xsi:type="opsem:SimpleFBTypeRuntime">
         <simpleFBType name="UINT2INT" comment="Writing UINT input to INT output">
           <versionInfo author="Bianca Wiesmayr" date="2023-03-07" version="1.0"/>

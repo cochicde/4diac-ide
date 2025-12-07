@@ -19,7 +19,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.fordiac.ide.fb.interpreter.OpSem.CompositeFBTypeRuntime;
-import org.eclipse.fordiac.ide.fb.interpreter.OpSem.FBNetworkRuntime;
 import org.eclipse.fordiac.ide.fb.interpreter.OpSem.OperationalSemanticsPackage;
 import org.eclipse.fordiac.ide.model.libraryElement.BlockFBNetworkElement;
 import org.eclipse.fordiac.ide.model.libraryElement.CompositeFBType;
@@ -35,13 +34,11 @@ import org.eclipse.fordiac.ide.model.libraryElement.CompositeFBType;
  * <em>Composite FB Type</em>}</li>
  * <li>{@link org.eclipse.fordiac.ide.fb.interpreter.OpSem.impl.CompositeFBTypeRuntimeImpl#getFbElement
  * <em>Fb Element</em>}</li>
- * <li>{@link org.eclipse.fordiac.ide.fb.interpreter.OpSem.impl.CompositeFBTypeRuntimeImpl#getNetworkRuntime
- * <em>Network Runtime</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class CompositeFBTypeRuntimeImpl extends FBRuntimeAbstractImpl implements CompositeFBTypeRuntime {
+public class CompositeFBTypeRuntimeImpl extends FBNetworkRuntimeImpl implements CompositeFBTypeRuntime {
 	/**
 	 * The cached value of the '{@link #getCompositeFBType() <em>Composite FB
 	 * Type</em>}' containment reference. <!-- begin-user-doc --> <!-- end-user-doc
@@ -62,16 +59,6 @@ public class CompositeFBTypeRuntimeImpl extends FBRuntimeAbstractImpl implements
 	 * @ordered
 	 */
 	protected BlockFBNetworkElement fbElement;
-
-	/**
-	 * The cached value of the '{@link #getNetworkRuntime() <em>Network
-	 * Runtime</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 *
-	 * @see #getNetworkRuntime()
-	 * @generated
-	 * @ordered
-	 */
-	protected FBNetworkRuntime networkRuntime;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -234,52 +221,6 @@ public class CompositeFBTypeRuntimeImpl extends FBRuntimeAbstractImpl implements
 	 * @generated
 	 */
 	@Override
-	public FBNetworkRuntime getNetworkRuntime() {
-		if (networkRuntime != null && networkRuntime.eIsProxy()) {
-			InternalEObject oldNetworkRuntime = (InternalEObject) networkRuntime;
-			networkRuntime = (FBNetworkRuntime) eResolveProxy(oldNetworkRuntime);
-			if (networkRuntime != oldNetworkRuntime) {
-				if (eNotificationRequired()) {
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							OperationalSemanticsPackage.COMPOSITE_FB_TYPE_RUNTIME__NETWORK_RUNTIME, oldNetworkRuntime,
-							networkRuntime));
-				}
-			}
-		}
-		return networkRuntime;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 *
-	 * @generated
-	 */
-	public FBNetworkRuntime basicGetNetworkRuntime() {
-		return networkRuntime;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 *
-	 * @generated
-	 */
-	@Override
-	public void setNetworkRuntime(FBNetworkRuntime newNetworkRuntime) {
-		FBNetworkRuntime oldNetworkRuntime = networkRuntime;
-		networkRuntime = newNetworkRuntime;
-		if (eNotificationRequired()) {
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					OperationalSemanticsPackage.COMPOSITE_FB_TYPE_RUNTIME__NETWORK_RUNTIME, oldNetworkRuntime,
-					networkRuntime));
-		}
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 *
-	 * @generated
-	 */
-	@Override
 	public CompositeFBType getModel() {
 		return compositeFBType;
 	}
@@ -317,11 +258,6 @@ public class CompositeFBTypeRuntimeImpl extends FBRuntimeAbstractImpl implements
 				return getFbElement();
 			}
 			return basicGetFbElement();
-		case OperationalSemanticsPackage.COMPOSITE_FB_TYPE_RUNTIME__NETWORK_RUNTIME:
-			if (resolve) {
-				return getNetworkRuntime();
-			}
-			return basicGetNetworkRuntime();
 		default:
 			return super.eGet(featureID, resolve, coreType);
 		}
@@ -340,9 +276,6 @@ public class CompositeFBTypeRuntimeImpl extends FBRuntimeAbstractImpl implements
 			return;
 		case OperationalSemanticsPackage.COMPOSITE_FB_TYPE_RUNTIME__FB_ELEMENT:
 			setFbElement((BlockFBNetworkElement) newValue);
-			return;
-		case OperationalSemanticsPackage.COMPOSITE_FB_TYPE_RUNTIME__NETWORK_RUNTIME:
-			setNetworkRuntime((FBNetworkRuntime) newValue);
 			return;
 		default:
 			super.eSet(featureID, newValue);
@@ -364,9 +297,6 @@ public class CompositeFBTypeRuntimeImpl extends FBRuntimeAbstractImpl implements
 		case OperationalSemanticsPackage.COMPOSITE_FB_TYPE_RUNTIME__FB_ELEMENT:
 			setFbElement((BlockFBNetworkElement) null);
 			return;
-		case OperationalSemanticsPackage.COMPOSITE_FB_TYPE_RUNTIME__NETWORK_RUNTIME:
-			setNetworkRuntime((FBNetworkRuntime) null);
-			return;
 		default:
 			super.eUnset(featureID);
 			return;
@@ -385,8 +315,6 @@ public class CompositeFBTypeRuntimeImpl extends FBRuntimeAbstractImpl implements
 			return compositeFBType != null;
 		case OperationalSemanticsPackage.COMPOSITE_FB_TYPE_RUNTIME__FB_ELEMENT:
 			return fbElement != null;
-		case OperationalSemanticsPackage.COMPOSITE_FB_TYPE_RUNTIME__NETWORK_RUNTIME:
-			return networkRuntime != null;
 		default:
 			return super.eIsSet(featureID);
 		}

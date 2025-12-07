@@ -131,7 +131,7 @@
         </typeRuntimes>
       </resultFBRuntime>
     </inputEventOccurrence>
-    <outputEventOccurrences event="//@transactions.0/@inputEventOccurrence/@resultFBRuntime/@typeRuntimes.0/@value/@basicfbtype/@interfaceList/@eventOutputs.0" createdTransactions="//@transactions.1">
+    <outputEventOccurrences event="//@transactions.0/@inputEventOccurrence/@resultFBRuntime/@typeRuntimes.0/@value/@basicfbtype/@interfaceList/@eventOutputs.0" >
       <fbRuntime xsi:type="opsem:BasicFBTypeRuntime" activeState="EO">
         <basicfbtype name="E_PERMIT" comment="permissive propagation of an event">
           <versionInfo author="Alois Zoitl" date="2017-09-20" organization="fortiss GmbH" remarks="initial API and implementation and/or initial documentation" version="1.0"/>

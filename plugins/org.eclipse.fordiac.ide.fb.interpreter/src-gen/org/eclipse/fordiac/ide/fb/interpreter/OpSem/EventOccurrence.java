@@ -13,7 +13,6 @@
  */
 package org.eclipse.fordiac.ide.fb.interpreter.OpSem;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.fordiac.ide.model.libraryElement.BlockFBNetworkElement;
 import org.eclipse.fordiac.ide.model.libraryElement.Event;
@@ -35,8 +34,6 @@ import org.eclipse.fordiac.ide.model.libraryElement.FBNetworkElement;
  * <em>Ignored</em>}</li>
  * <li>{@link org.eclipse.fordiac.ide.fb.interpreter.OpSem.EventOccurrence#getFbRuntime
  * <em>Fb Runtime</em>}</li>
- * <li>{@link org.eclipse.fordiac.ide.fb.interpreter.OpSem.EventOccurrence#getCreatedTransactions
- * <em>Created Transactions</em>}</li>
  * <li>{@link org.eclipse.fordiac.ide.fb.interpreter.OpSem.EventOccurrence#getParentFB
  * <em>Parent FB</em>}</li>
  * <li>{@link org.eclipse.fordiac.ide.fb.interpreter.OpSem.EventOccurrence#getResultFBRuntime
@@ -143,22 +140,6 @@ public interface EventOccurrence extends EObject {
 	 * @generated
 	 */
 	void setFbRuntime(FBRuntimeAbstract value);
-
-	/**
-	 * Returns the value of the '<em><b>Created Transactions</b></em>' reference
-	 * list. The list contents are of type
-	 * {@link org.eclipse.fordiac.ide.fb.interpreter.OpSem.Transaction}. It is
-	 * bidirectional and its opposite is
-	 * '{@link org.eclipse.fordiac.ide.fb.interpreter.OpSem.Transaction#getParentEO
-	 * <em>Parent EO</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 *
-	 * @return the value of the '<em>Created Transactions</em>' reference list.
-	 * @see org.eclipse.fordiac.ide.fb.interpreter.OpSem.OperationalSemanticsPackage#getEventOccurrence_CreatedTransactions()
-	 * @see org.eclipse.fordiac.ide.fb.interpreter.OpSem.Transaction#getParentEO
-	 * @model opposite="parentEO"
-	 * @generated
-	 */
-	EList<Transaction> getCreatedTransactions();
 
 	/**
 	 * Returns the value of the '<em><b>Parent FB</b></em>' reference. <!--

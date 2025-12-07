@@ -76,7 +76,6 @@ public interface Transaction extends EObject {
 	 * @see #setParentEO(EventOccurrence)
 	 * @see org.eclipse.fordiac.ide.fb.interpreter.OpSem.OperationalSemanticsPackage#getTransaction_ParentEO()
 	 * @see org.eclipse.fordiac.ide.fb.interpreter.OpSem.EventOccurrence#getCreatedTransactions
-	 * @model opposite="createdTransactions"
 	 * @generated
 	 */
 	EventOccurrence getParentEO();
