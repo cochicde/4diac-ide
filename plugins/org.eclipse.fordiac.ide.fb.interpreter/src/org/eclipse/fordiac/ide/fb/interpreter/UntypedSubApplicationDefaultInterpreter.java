@@ -23,9 +23,11 @@ public class UntypedSubApplicationDefaultInterpreter extends FBWithNetworkDefaul
 		if (InterfacePinUtils.isInput(eventOccurrence.getEvent())) { // we are entering the inner SubApp network
 			runtime = RuntimeFactory.getOrCreateNetworkRuntime(fBNetworkRuntime, uSubApp);
 		} else { // we are leaving the inner SubApp network
-			runtime = RuntimeFactory.getOrCreateOuterNetworkRuntime(fBNetworkRuntime, uSubApp);
+			runtime = fBNetworkRuntime;
 		}
+		final var realUSubApp = (UntypedSubApp) eventOccurrence.getParentFB().getOpposite();
+		final var event = realUSubApp.getInterface().getEvent(eventOccurrence.getEvent().getName());
 
-		return switchNetwork(eventOccurrence.getEvent(), runtime);
+		return switchNetwork(event, runtime);
 	}
 }
