@@ -71,7 +71,8 @@ public class FBWithNetworkDefaultInterpreter {
 
 	protected EList<EventOccurrence> switchNetwork(final Event event, final FBNetworkRuntime runtime) {
 		final EList<Connection> outputs = ConnectionUtils.getOutputConnections(event);
-		final EventOccurrence outputEO = EventOccFactory.createFrom(eventOccurrence.getEvent(), runtime);
+		final EventOccurrence outputEO = EventOccFactory.createFrom(eventOccurrence.getEvent(),
+				EcoreUtil.copy(runtime));
 		for (final Connection conn : outputs) {
 			// add transactions
 			final EventConnection eventConn = (EventConnection) conn;
