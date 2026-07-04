@@ -84,6 +84,7 @@ public final class Messages extends NLS {
 	public static String Error_SelfInsertion;
 	public static String Error_TSAinCFB;
 	public static String ErrorMarkerInterfaceAnnotations_MissingVariableForAttribute;
+	public static String ErrorMarkerInterfaceAnnotations_MissingVariableForComment;
 	public static String AttributeAnnotations_MissingAttributeDeclaration;
 
 	public static String ErrorMarkerInterfaceAnnotations_MissingVariableForValue;
@@ -125,6 +126,8 @@ public final class Messages extends NLS {
 	public static String ImportUtils_ERROR_ParameterNotSet;
 	public static String ImportUtils_ERROR_ParameterValueNotSet;
 	public static String InterfaceElementAnnotations_DuplicateName;
+	public static String InterfaceElementAnnotations_UnusedExternal;
+	public static String InterfaceElementAnnotations_UnusedInternal;
 	public static String LinkConstraints_ClassLinkconstraintsShouldNotBeCreated;
 	public static String LinkConstraints_ConnectingIncompatibleInterfaceTypes;
 	public static String LinkConstraints_ERROR_NotConnectedToAnEventByAWithConstruct;

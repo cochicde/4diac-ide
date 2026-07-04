@@ -17,14 +17,22 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.function.Consumer;
 
+import org.eclipse.swt.graphics.Color;
+
 public class EventMarker {
 	private final int index;
 	private final TimelineModel parentTimeline;
 	private final Consumer<Integer> eventSelected;
 	private boolean isCurrentEvent = false;
 	private boolean isValid = false;
+	private boolean isReadOnly = false;
+	private boolean isHightlighted = false;
+	private Color comparisonColor = null;
+	private String comment = null;
 
 	public static final String PROPERTY_EVENT_CHANGED = "eventChanged"; //$NON-NLS-1$
+
+	public static final String PROPERTY_IS_CURRENT_CHANGED = "isCurrentChanged"; //$NON-NLS-1$
 
 	private final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
 
@@ -38,6 +46,24 @@ public class EventMarker {
 		return index;
 	}
 
+	public Color getComparisonColor() {
+		return comparisonColor;
+	}
+
+	public void setComparisonColor(final Color color) {
+		this.comparisonColor = color;
+		propertyChangeSupport.firePropertyChange(PROPERTY_EVENT_CHANGED, null, null);
+	}
+
+	public void setIsReadOnly(final boolean isReadOnly) {
+		this.isReadOnly = isReadOnly;
+		propertyChangeSupport.firePropertyChange(PROPERTY_EVENT_CHANGED, null, null);
+	}
+
+	public boolean getIsReadOnly() {
+		return isReadOnly;
+	}
+
 	public boolean getIsCurrentEvent() {
 		return isCurrentEvent;
 	}
@@ -48,7 +74,7 @@ public class EventMarker {
 
 	public void setIsCurrentEvent(final boolean isCurrentEvent) {
 		this.isCurrentEvent = isCurrentEvent;
-		propertyChangeSupport.firePropertyChange(PROPERTY_EVENT_CHANGED, null, null);
+		propertyChangeSupport.firePropertyChange(PROPERTY_IS_CURRENT_CHANGED, null, null);
 	}
 
 	public boolean getValid() {
@@ -64,6 +90,24 @@ public class EventMarker {
 		eventSelected.accept(Integer.valueOf(index));
 	}
 
+	public void setComment(final String comment) {
+		this.comment = comment;
+		propertyChangeSupport.firePropertyChange(PROPERTY_EVENT_CHANGED, null, null);
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public boolean getIsHighlighted() {
+		return isHightlighted;
+	}
+
+	public void setIsHighlighted(final boolean isHightlighted) {
+		this.isHightlighted = isHightlighted;
+		propertyChangeSupport.firePropertyChange(PROPERTY_EVENT_CHANGED, null, null);
+	}
+
 	// Listener to this
 
 	public void addPropertyChangeListener(final PropertyChangeListener listener) {
@@ -73,4 +117,5 @@ public class EventMarker {
 	public void removePropertyChangeListener(final PropertyChangeListener listener) {
 		propertyChangeSupport.removePropertyChangeListener(listener);
 	}
+
 }

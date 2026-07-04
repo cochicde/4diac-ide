@@ -14,6 +14,7 @@
 package org.eclipse.fordiac.ide.library;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -39,6 +40,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -61,7 +64,10 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.URIUtil;
+import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.core.runtime.jobs.JobChangeAdapter;
+import org.eclipse.equinox.p2.operations.IProfileChangeJob;
 import org.eclipse.fordiac.ide.library.download.DownloadResult;
 import org.eclipse.fordiac.ide.library.download.IArchiveDownloader;
 import org.eclipse.fordiac.ide.library.model.library.Manifest;
@@ -82,6 +88,8 @@ import org.osgi.framework.VersionRange;
 public enum LibraryManager {
 
 	INSTANCE;
+
+	private static final String UPDATE_JOB_NAME = "Updating Software"; //$NON-NLS-1$
 
 	public static final String LIB_TYPELIB_FOLDER_NAME = "typelib"; //$NON-NLS-1$
 	public static final String PACKAGE_DOWNLOAD_DIRECTORY = ".download"; //$NON-NLS-1$
@@ -116,7 +124,8 @@ public enum LibraryManager {
 			VersionRange.RIGHT_CLOSED);
 
 	private WatchService watchService;
-	private final HashMap<String, List<LibraryRecord>> stdlibraries = new HashMap<>();
+	private final AtomicBoolean standardLibraryResolutionEnabled = new AtomicBoolean(true);
+	private final Map<String, List<LibraryRecord>> stdlibraries = new ConcurrentHashMap<>();
 	private final HashMap<String, List<LibraryRecord>> libraries = new HashMap<>();
 
 	public static final Object FAMILY_FORDIAC_LIBRARY = new Object();
@@ -149,6 +158,26 @@ public enum LibraryManager {
 		}
 
 		LibraryPermission.setLibReadOnly(standardLibraryPath);
+		initP2UpdateListener();
+	}
+
+	private void initP2UpdateListener() {
+		Job.getJobManager().addJobChangeListener(new JobChangeAdapter() {
+			@Override
+			public void aboutToRun(final IJobChangeEvent event) {
+				if (isUpdateProvisioningJob(event.getJob())) {
+					standardLibraryResolutionEnabled.set(false);
+				}
+			}
+
+			@Override
+			public void done(final IJobChangeEvent event) {
+				if (isUpdateProvisioningJob(event.getJob())) {
+					standardLibraryResolutionEnabled.set(true);
+				}
+			}
+
+		});
 	}
 
 	/**
@@ -273,18 +302,19 @@ public enum LibraryManager {
 	public java.net.URI extractLibrary(final Path path, final IProject project, final boolean autoImport,
 			final boolean resolve) throws IOException {
 		if (path == null) {
-			// FIXME: AF: FileNotFoundException would be much more clear
-			return null;
+			throw new FileNotFoundException("Archive path not provided"); //$NON-NLS-1$
 		}
-		final Path real = path.toRealPath();
-		if (!Files.isRegularFile(real)) {
-			// FIXME: AF: FileNotFoundException would be much more clear
-			return null;
+
+		final Path archive = path.toRealPath();
+
+		if (!Files.isRegularFile(archive)) {
+			throw new FileNotFoundException("Archive file does not exist: " + archive); //$NON-NLS-1$
 		}
-		FordiacLogHelper.logInfo("Extracting library at " + real); //$NON-NLS-1$
+
+		FordiacLogHelper.logInfo("Extracting library at " + archive); //$NON-NLS-1$
 		final byte[] buffer = new byte[1024];
 		String folderName;
-		try (InputStream inputStream = Files.newInputStream(real);
+		try (InputStream inputStream = Files.newInputStream(archive);
 				ZipInputStream zipInputStream = new ZipInputStream(inputStream)) {
 			ZipEntry entry = zipInputStream.getNextEntry();
 			folderName = ""; //$NON-NLS-1$
@@ -603,6 +633,10 @@ public enum LibraryManager {
 	public void resolveDependencies(final IProject project, final Manifest projectManifest,
 			final IProgressMonitor monitor) throws OperationCanceledException, CoreException {
 
+		if (!standardLibraryResolutionEnabled.get()) {
+			return;
+		}
+
 		final LibraryManagerData libManagerData = LibraryManagerData.init();
 
 		final Queue<String> queue = new LinkedList<>(); // symbolicNames
@@ -720,7 +754,7 @@ public enum LibraryManager {
 				return false;
 			});
 		} catch (final CoreException e) {
-			e.printStackTrace();
+			FordiacLogHelper.logError("Could not get all libraries!", e); //$NON-NLS-1$
 		}
 		return libs;
 	}
@@ -1063,6 +1097,10 @@ public enum LibraryManager {
 	private static Stream<Version> getAvailableVersions(final Map<String, List<LibraryRecord>> lib,
 			final String symbolicName) {
 		return lib.getOrDefault(symbolicName, Collections.emptyList()).stream().map(LibraryRecord::version);
+	}
+
+	private static boolean isUpdateProvisioningJob(final Job job) {
+		return job instanceof IProfileChangeJob && UPDATE_JOB_NAME.equals(job.getName());
 	}
 
 }

@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -175,16 +176,51 @@ public class ExportBuilder extends IncrementalProjectBuilder {
 
 	private void incrementalBuild(final IResourceDelta rootDelta, final SubMonitor monitor, final BuildContext context)
 			throws CoreException {
+
+		/*
+		 * check if relevant files have been removed first, 2 x delta tree traversal is
+		 * cheaper than unnecessary exports of files
+		 */
+		if (containsDeltaRequiringFullBuild(rootDelta, monitor)) {
+			clean(monitor);
+			fullBuild(monitor, context);
+			return;
+		}
+
 		rootDelta.accept((IResourceDeltaVisitor) delta -> {
 			if (isExportCanceled(monitor)) {
 				throw new OperationCanceledException();
 			}
 
-			if ((delta.getResource() instanceof final IFile file) && includeInIncrementalBuild(file)) {
+			if (delta.getResource() instanceof final IFile file && file.exists() && includeInIncrementalBuild(file)) {
 				exportElement(monitor, file, context);
 			}
 			return true;
 		}, IResourceDelta.CONTENT | IResourceDelta.CHANGED | IResourceDelta.ADDED);
+	}
+
+	/**
+	 * Checks whether the resource delta contains a removed exportable file that
+	 * requires a full build.
+	 */
+	private boolean containsDeltaRequiringFullBuild(final IResourceDelta rootDelta, final SubMonitor monitor)
+			throws CoreException {
+		final AtomicBoolean result = new AtomicBoolean(false);
+
+		rootDelta.accept((IResourceDeltaVisitor) delta -> {
+			if (isExportCanceled(monitor)) {
+				throw new OperationCanceledException();
+			}
+
+			if (delta.getResource() instanceof final IFile file && isExportableFileType(file)
+					&& isOnExportBuildpath(file)) {
+				result.set(true);
+				return false;
+			}
+			return true;
+		}, IResourceDelta.REMOVED);
+
+		return result.get();
 	}
 
 	private static boolean includeInFullBuild(final IFile file) throws CoreException {
