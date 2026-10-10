@@ -20,6 +20,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.fordiac.ide.deployment.debug.ui.annotation.WatchValueAnnotation;
+import org.eclipse.fordiac.ide.model.libraryElement.BasicFBType;
 import org.eclipse.fordiac.ide.model.libraryElement.FBNetworkElement;
 import org.eclipse.fordiac.ide.model.libraryElement.IInterfaceElement;
 import org.eclipse.gef.EditPart;
@@ -83,10 +84,17 @@ public class SelectionService implements ISelectionListener {
 					}
 					lastSelectedDatapoints.add(interfaceElement.getQualifiedName());
 				}
+				if (fb.getType() instanceof BasicFBType) {
+					// add also the ECC current state
+					lastSelectedDatapoints.add(fb.getQualifiedName() + ".!ECC");
+				}
 			}
 			case final org.eclipse.fordiac.ide.model.libraryElement.Connection conn -> {
 				lastSelectedDatapoints.add(conn.getSource().getQualifiedName());
 				lastSelectedDatapoints.add(conn.getDestination().getQualifiedName());
+				// add also the connection data
+				lastSelectedDatapoints
+						.add(conn.getSource().getQualifiedName() + "!" + conn.getDestination().getQualifiedName());
 			}
 			case final WatchValueAnnotation watch -> lastSelectedDatapoints.add(watch.getElement().getQualifiedName());
 			default -> {
