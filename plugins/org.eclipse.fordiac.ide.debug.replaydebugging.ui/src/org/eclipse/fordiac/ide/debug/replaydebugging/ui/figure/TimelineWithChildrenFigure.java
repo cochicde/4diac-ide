@@ -24,7 +24,9 @@ import org.eclipse.draw2d.geometry.Rectangle;
 /**
  * @brief Figure that represents a timeline and its spawned timelines (children)
  */
-public class TimelineWithChildrenFigure extends Figure {
+public class TimelineWithChildrenFigure extends Figure implements IEventAxis {
+
+	private int maxNumberOfEvents;
 
 	private final Figure timelineFigure;
 	private final LineFigure lineFigure;
@@ -39,6 +41,7 @@ public class TimelineWithChildrenFigure extends Figure {
 		layout.setStretchMinorAxis(true);
 		setLayoutManager(layout);
 		setOpaque(true);
+		this.maxNumberOfEvents = maxNumberOfEvents;
 
 		// the timeline figure contains a line, and the events are later added by the
 		// caller
@@ -84,6 +87,7 @@ public class TimelineWithChildrenFigure extends Figure {
 	}
 
 	public void updateMaxNumberOfEvents(final int maxNumberOfEvents) {
+		this.maxNumberOfEvents = maxNumberOfEvents;
 		lineFigure.setMaxNumberOfEvents(maxNumberOfEvents);
 
 		final int newWidth = maxNumberOfEvents * CommonFigureConstants.TOTAL_MARKER_SPACE;
@@ -110,5 +114,26 @@ public class TimelineWithChildrenFigure extends Figure {
 	protected void paintFigure(final Graphics g) {
 		timelineFigure.paint(g);
 		childrenFigure.paint(g);
+	}
+
+	// IEventAxis implementation
+	@Override
+	public IFigure getFigure() {
+		return this;
+	}
+
+	@Override
+	public int getEventCount() {
+		return maxNumberOfEvents;
+	}
+
+	@Override
+	public int getFirstEventCenterX() {
+		return getBounds().x + CommonFigureConstants.MARKER_SIZE / 2;
+	}
+
+	@Override
+	public double getEventPitch() {
+		return CommonFigureConstants.TOTAL_MARKER_SPACE;
 	}
 }
