@@ -16,7 +16,9 @@ package org.eclipse.fordiac.ide.debug.replaydebugging.ui;
 import org.eclipse.draw2d.zoom.AbstractZoomManager;
 import org.eclipse.fordiac.ide.debug.replaydebugging.core.IReplayNavigatorRegistrationListener;
 import org.eclipse.fordiac.ide.debug.replaydebugging.core.ReplayNavigator;
+import org.eclipse.fordiac.ide.debug.replaydebugging.core.ReplayNavigator.EventPosition;
 import org.eclipse.fordiac.ide.debug.replaydebugging.core.ReplayNavigatorManager;
+import org.eclipse.fordiac.ide.debug.replaydebugging.core.Timeline;
 import org.eclipse.fordiac.ide.debug.replaydebugging.ui.editpart.TimelineEditPartFactory;
 import org.eclipse.fordiac.ide.debug.replaydebugging.ui.model.Session;
 import org.eclipse.fordiac.ide.debug.replaydebugging.ui.statescomparison.ComparisonService;
@@ -76,6 +78,30 @@ public class ReplayDebuggingView extends ViewPart implements IReplayNavigatorReg
 		}
 	};
 
+	private final CommentsHandler.Listener commentsHandlerListener = new CommentsHandler.Listener() {
+
+		@Override
+		public void eventCommentChanged(final EventPosition position, final String comment, final Event event) {
+			openCommentsView(event);
+		}
+
+		@Override
+		public void timelineCommentChanged(final Timeline timeline, final String comment, final Event event) {
+			openCommentsView(event);
+		}
+
+		private void openCommentsView(final Event event) {
+			if (event == CommentsHandler.Listener.Event.ADDED_EDITED) {
+				final var page = getSite().getPage();
+				try {
+					page.showView(CommentsView.VIEW_ID, null, IWorkbenchPage.VIEW_VISIBLE);
+				} catch (final PartInitException e) {
+					FordiacLogHelper.logError("Failed to open Comments View", e); //$NON-NLS-1$
+				}
+			}
+		}
+	};
+
 	private final RGB replayColor = new RGB(255, 165, 0); // Orange color for changed datapoints
 
 	@Override
@@ -123,6 +149,7 @@ public class ReplayDebuggingView extends ViewPart implements IReplayNavigatorReg
 		registry.put(DeploymentDebugModelPresentation.WATCH_ERROR_COLOR, replayColor);
 
 		ComparisonService.getInstance().addListener(stateComparisonListener);
+		CommentsHandler.getInstance().addListener(commentsHandlerListener);
 
 		ReplayNavigatorManager.getDefault().addListener(this);
 		SelectionService.getDefault().install(getSite().getPage());
@@ -134,6 +161,7 @@ public class ReplayDebuggingView extends ViewPart implements IReplayNavigatorReg
 						originalErrorColor);
 			}
 			ComparisonService.getInstance().removeListener(stateComparisonListener);
+			CommentsHandler.getInstance().removeListener(commentsHandlerListener);
 		});
 		viewer.setContents(session);
 

@@ -224,7 +224,8 @@ public class TimelineModel implements Timeline.StructureListener, ComparisonServ
 	}
 
 	@Override
-	public void eventCommentChanged(final EventPosition position, final String comment) {
+	public void eventCommentChanged(final EventPosition position, final String comment,
+			final CommentsHandler.Listener.Event event) {
 		if (position.timeline() != timeline) {
 			return;
 		}
@@ -240,7 +241,8 @@ public class TimelineModel implements Timeline.StructureListener, ComparisonServ
 	}
 
 	@Override
-	public void timelineCommentChanged(final Timeline timeline, final String comment) {
+	public void timelineCommentChanged(final Timeline timeline, final String comment,
+			final CommentsHandler.Listener.Event event) {
 		if (timeline != this.timeline) {
 			return;
 		}

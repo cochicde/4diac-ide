@@ -21,6 +21,12 @@
             id="org.eclipse.fordiac.ide.debug.replaydebugging.ui.StatesComparisonView"
             name="%statesComparisonView.name">
       </view>
+      <view
+			class="org.eclipse.fordiac.ide.debug.replaydebugging.ui.CommentsView"
+			id="org.eclipse.fordiac.ide.debug.replaydebugging.ui.CommentsView"
+			name="Replay Debugging Comments"
+			restorable="true">
+	  </view>
    </extension>
    <extension
          point="org.eclipse.debug.ui.launchConfigurationTypeImages">

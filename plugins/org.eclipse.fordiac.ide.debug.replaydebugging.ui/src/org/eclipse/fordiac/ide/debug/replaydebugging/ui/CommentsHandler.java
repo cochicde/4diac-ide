@@ -42,15 +42,21 @@ public class CommentsHandler {
 	// ── Listener interface ────────────────────────────────────────────────
 
 	public interface Listener {
+
+		enum Event {
+			ADDED_EDITED, REMOVED
+
+		}
+
 		/**
 		 * Fired on the UI thread after any add, update, or remove operation.
 		 *
 		 * @param position the position whose comment changed
 		 * @param comment  the new comment, or null if the comment was removed
 		 */
-		void eventCommentChanged(EventPosition position, String comment);
+		void eventCommentChanged(EventPosition position, String comment, Event event);
 
-		void timelineCommentChanged(Timeline timeline, String comment);
+		void timelineCommentChanged(Timeline timeline, String comment, Event event);
 	}
 
 	private final Map<EventPosition, String> eventComments = new ConcurrentHashMap<>();
@@ -67,12 +73,12 @@ public class CommentsHandler {
 	 */
 	public void setComment(final EventPosition position, final String comment) {
 		eventComments.put(position, comment);
-		notifyListeners(position, comment);
+		notifyListeners(position, comment, Listener.Event.ADDED_EDITED);
 	}
 
 	public void setComment(final Timeline timeline, final String comment) {
 		timelineComments.put(timeline, comment);
-		notifyListeners(timeline, comment);
+		notifyListeners(timeline, comment, Listener.Event.ADDED_EDITED);
 	}
 
 	/**
@@ -81,13 +87,13 @@ public class CommentsHandler {
 	 */
 	public void removeComment(final EventPosition position) {
 		if (eventComments.remove(position) != null) {
-			notifyListeners(position, null);
+			notifyListeners(position, null, Listener.Event.REMOVED);
 		}
 	}
 
 	public void removeComment(final Timeline timeline) {
 		if (timelineComments.remove(timeline) != null) {
-			notifyListeners(timeline, null);
+			notifyListeners(timeline, null, Listener.Event.REMOVED);
 		}
 	}
 
@@ -113,7 +119,7 @@ public class CommentsHandler {
 		return Map.copyOf(eventComments);
 	}
 
-	public Map<Timeline, String> getAllTimlineComments() {
+	public Map<Timeline, String> getAllTimelineComments() {
 		return Map.copyOf(timelineComments);
 	}
 
@@ -121,8 +127,10 @@ public class CommentsHandler {
 
 	public void addListener(final Listener listener) {
 		listeners.add(listener);
-		eventComments.forEach(listener::eventCommentChanged);
-		timelineComments.forEach(listener::timelineCommentChanged);
+		eventComments.forEach(
+				(position, comment) -> listener.eventCommentChanged(position, comment, Listener.Event.ADDED_EDITED));
+		timelineComments.forEach(
+				(position, comment) -> listener.timelineCommentChanged(position, comment, Listener.Event.ADDED_EDITED));
 	}
 
 	public void removeListener(final Listener listener) {
@@ -131,11 +139,12 @@ public class CommentsHandler {
 
 	// ── Notification ──────────────────────────────────────────────────────
 
-	private void notifyListeners(final EventPosition position, final String comment) {
-		Display.getDefault().asyncExec(() -> listeners.forEach(l -> l.eventCommentChanged(position, comment)));
+	private void notifyListeners(final EventPosition position, final String comment, final Listener.Event event) {
+		Display.getDefault().asyncExec(() -> listeners.forEach(l -> l.eventCommentChanged(position, comment, event)));
 	}
 
-	private void notifyListeners(final Timeline timeline, final String comment) {
-		Display.getDefault().asyncExec(() -> listeners.forEach(l -> l.timelineCommentChanged(timeline, comment)));
+	private void notifyListeners(final Timeline timeline, final String comment, final Listener.Event event) {
+		Display.getDefault()
+				.asyncExec(() -> listeners.forEach(l -> l.timelineCommentChanged(timeline, comment, event)));
 	}
 }
